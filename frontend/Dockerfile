@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run build
 
-# Контейнер используется только для сборки
-# dist/ монтируется наружу через volume для nginx на хосте
+EXPOSE 3000
+
+CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build; else npm run dev -- --host 0.0.0.0 --port 3000; fi"]
