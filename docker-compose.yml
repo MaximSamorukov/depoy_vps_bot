@@ -29,7 +29,7 @@ services:
     build: ./bot
     environment:
       BACKEND_URL: http://backend:5000
-      BOT_TOKEN: ${BOT_TOKEN}2
+      BOT_TOKEN: ${BOT_TOKEN}
     depends_on:
       - backend
     networks:
@@ -37,14 +37,10 @@ services:
 
   frontend:
     build: ./frontend
-    ports:
-      - "3000:3000" # Nginx отдает собранный build
-    environment:
-      VITE_API_URL: /api # прокси на бекенд
+    volumes:
+      - ./frontend/dist:/app/dist
     depends_on:
       - backend
-    networks:
-      - public
 
 networks:
   internal:
