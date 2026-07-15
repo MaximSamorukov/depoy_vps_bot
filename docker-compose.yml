@@ -40,8 +40,8 @@ services:
       - production
     build: ./frontend
     volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/vite.config.ts:/app/vite.config.ts
+      #- ./frontend/src:/app/src
+      #- ./frontend/vite.config.ts:/app/vite.config.ts
       - ./frontend/dist:/app/dist
     ports:
       - "3000:3000"
@@ -52,7 +52,7 @@ services:
       - backend
     networks:
       - public
-    command: sh -c "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build && tail -f /dev/null; else npm run dev -- --host 0.0.0.0 --port 3000; fi"
+    command: sh -c "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build && npx serve dist -l 3000; else npm run dev -- --host 0.0.0.0 --port 3000; fi"
 
 networks:
   internal:
