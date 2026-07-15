@@ -8,7 +8,7 @@
 
 2. Создайте файл `.env` в корне проекта:
 ```
-TELEGRAM_BOT_TOKEN=your_bot_token_here
+BOT_TOKEN=your_bot_token_here
 ```
 
 ## Запуск

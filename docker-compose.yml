@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: appdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://app:secret@postgres:5432/appdb
+      BOT_TOKEN: ${BOT_TOKEN}
+    depends_on:
+      - postgres
+    networks:
+      - internal
+      - public
+
+  bot:
+    build: ./bot
+    environment:
+      BACKEND_URL: http://backend:5000
+      BOT_TOKEN: ${BOT_TOKEN}2
+    depends_on:
+      - backend
+    networks:
+      - internal
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000" # Nginx отдает собранный build
+    environment:
+      VITE_API_URL: /api # прокси на бекенд
+    depends_on:
+      - backend
+    networks:
+      - public
+
+networks:
+  internal:
+    internal: true # изолированная сеть для БД
+  public:
+
+volumes:
+  pgdata:
