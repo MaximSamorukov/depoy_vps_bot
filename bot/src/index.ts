@@ -1,7 +1,9 @@
 import { bot } from './bot';
 import { registerStartHandler } from './handlers/start';
+import { registerCallbackHandler } from './handlers/callback';
 
 registerStartHandler(bot);
+registerCallbackHandler(bot);
 
 async function main() {
   console.log('Starting bot...');
