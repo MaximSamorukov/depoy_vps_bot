@@ -17,14 +17,14 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             set -e
-            cd ~/project/deploy_vps_bot
+            cd ~/project/depoy_vps_bot
             cat > .env << 'EOF'
             BOT_TOKEN=${{ secrets.VPS_BOT_TOKEN }}
             DATABASE_URL=postgresql://app:${{ secrets.VPS_DB_PASSWORD }}@postgres:5432/appdb
             NODE_ENV=production
             VITE_API_URL=http://backend:5000/api
             EOF
-            cd ~/project/deploy_vps_bot
+            cd ~/project/depoy_vps_bot
             git pull origin dev
             docker compose down
             docker compose --profile production up --build -d
