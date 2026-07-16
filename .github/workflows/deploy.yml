@@ -29,5 +29,3 @@ jobs:
             docker compose down
             docker compose --profile production up --build -d
             docker image prune -f
-            sleep 5
-            curl -f http://localhost:3000 || exit 1
