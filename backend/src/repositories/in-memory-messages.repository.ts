@@ -1,23 +1,23 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Message, CreateMessageDto, UpdateMessageDto } from '../models/message.model';
 import { IMessagesRepository } from './messages.repository.interface';
 
 export class InMemoryMessagesRepository implements IMessagesRepository {
-  private messages: Map<string, Message> = new Map();
+  private messages: Map<number, Message> = new Map();
+  private nextId = 1;
 
   async findAll(): Promise<Message[]> {
     return Array.from(this.messages.values());
   }
 
-  async findById(id: string): Promise<Message | null> {
+  async findById(id: number): Promise<Message | null> {
     return this.messages.get(id) || null;
   }
 
   async create(data: CreateMessageDto): Promise<Message> {
     const now = new Date();
     const message: Message = {
-      id: uuidv4(),
-      text: data.text,
+      id: this.nextId++,
+      message: data.message,
       createdAt: now,
       updatedAt: now,
     };
@@ -25,7 +25,7 @@ export class InMemoryMessagesRepository implements IMessagesRepository {
     return message;
   }
 
-  async update(id: string, data: UpdateMessageDto): Promise<Message | null> {
+  async update(id: number, data: UpdateMessageDto): Promise<Message | null> {
     const existing = this.messages.get(id);
     if (!existing) {
       return null;
@@ -33,14 +33,14 @@ export class InMemoryMessagesRepository implements IMessagesRepository {
 
     const updated: Message = {
       ...existing,
-      text: data.text ?? existing.text,
+      message: data.message ?? existing.message,
       updatedAt: new Date(),
     };
     this.messages.set(id, updated);
     return updated;
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(id: number): Promise<boolean> {
     return this.messages.delete(id);
   }
 }

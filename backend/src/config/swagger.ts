@@ -23,7 +23,7 @@ export const swaggerOptions: Options = {
               type: 'string',
               format: 'uuid',
             },
-            text: {
+            message: {
               type: 'string',
             },
             createdAt: {
@@ -40,7 +40,7 @@ export const swaggerOptions: Options = {
           type: 'object',
           required: ['text'],
           properties: {
-            text: {
+            message: {
               type: 'string',
               minLength: 1,
               maxLength: 1000,
@@ -50,7 +50,7 @@ export const swaggerOptions: Options = {
         UpdateMessageDto: {
           type: 'object',
           properties: {
-            text: {
+            message: {
               type: 'string',
               minLength: 1,
               maxLength: 1000,

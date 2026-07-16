@@ -16,7 +16,12 @@ export class MessagesController {
 
   getById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const message = await this.service.getById(req.params.id as string);
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        res.status(204).send();
+        return;
+      }
+      const message = await this.service.getById(id);
       res.json(message);
     } catch (error) {
       next(error);
@@ -34,10 +39,12 @@ export class MessagesController {
 
   update = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const message = await this.service.update(
-        req.params.id as string,
-        req.body as UpdateMessageDto
-      );
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        res.status(204).send();
+        return;
+      }
+      const message = await this.service.update(id, req.body as UpdateMessageDto);
       res.json(message);
     } catch (error) {
       next(error);
@@ -46,7 +53,12 @@ export class MessagesController {
 
   delete = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await this.service.delete(req.params.id as string);
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        res.status(204).send();
+        return;
+      }
+      await this.service.delete(id);
       res.status(204).send();
     } catch (error) {
       next(error);

@@ -2,11 +2,14 @@ import { Request, Response, NextFunction } from 'express';
 import { z, ZodSchema } from 'zod';
 
 export const createMessageSchema = z.object({
-  text: z.string().min(1, 'Text is required').max(1000, 'Text must be less than 1000 characters'),
+  message: z
+    .string()
+    .min(1, 'Text is required')
+    .max(1000, 'Text must be less than 1000 characters'),
 });
 
 export const updateMessageSchema = z.object({
-  text: z
+  message: z
     .string()
     .min(1, 'Text is required')
     .max(1000, 'Text must be less than 1000 characters')
