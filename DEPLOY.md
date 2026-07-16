@@ -97,7 +97,7 @@ npm run dev          # запуск Vite dev server
 
 ```bash
 # Запуск с frontend в production режиме
-docker-compose --profile production up -d
+docker-compose --profile production up --build -d
 
 # Проверка статуса
 docker-compose ps
@@ -144,7 +144,7 @@ docker-compose down
 ### Production
 ```bash
 # Запуск всех сервисов включая frontend
-docker-compose --profile production up -d
+docker-compose --profile production up --build -d
 
 # Перезапуск всех сервисов
 docker-compose --profile production restart
@@ -202,7 +202,7 @@ docker-compose up -d  # только backend/bot/db
 Убедитесь, что используете правильный флаг:
 ```bash
 # Правильно
-docker-compose --profile production up -d
+docker-compose --profile production up --build -d
 
 # Неправильно (frontend не запустится)
 docker-compose up -d
@@ -222,7 +222,7 @@ Proxy в Vite настроен на `http://localhost:5000` — убедитес
 ```bash
 # Из разработки в production
 docker-compose down
-docker-compose --profile production up -d
+docker-compose --profile production up --build -d
 
 # Из production в разработку
 docker-compose down
