@@ -7,22 +7,23 @@ import { errorHandler } from './middleware/error-handler';
 import { createMessagesRoutes } from './routes/messages.routes';
 import { MessagesController } from './controllers/messages.controller';
 import { MessagesService } from './services/messages.service';
-import { InMemoryMessagesRepository } from './repositories/in-memory-messages.repository';
+import { PostgresMessagesRepository } from './repositories/postgres-messages.repository';
 
-const repository = new InMemoryMessagesRepository();
-const service = new MessagesService(repository);
-const controller = new MessagesController(service);
+export const createApp = () => {
+  const repository = new PostgresMessagesRepository();
+  const service = new MessagesService(repository);
+  const controller = new MessagesController(service);
 
-const app = express();
+  const app = express();
+  app.use(cors());
+  app.use(express.json());
 
-app.use(cors());
-app.use(express.json());
+  const swaggerSpec = swaggerJSDoc(swaggerOptions);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-const swaggerSpec = swaggerJSDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use('/api/messages', createMessagesRoutes(controller));
 
-app.use('/api/messages', createMessagesRoutes(controller));
+  app.use(errorHandler);
 
-app.use(errorHandler);
-
-export { app };
+  return app;
+};
