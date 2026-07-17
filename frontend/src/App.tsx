@@ -6,6 +6,7 @@ interface Message {
 }
 function App() {
   const [input, setInput] = useState("");
+  const [url, setUrl] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
@@ -18,7 +19,10 @@ function App() {
   const handleSave = async () => {
     if (!input.trim()) return;
     try {
-      const res = await fetch(import.meta.env.VITE_API_URL + "/messages", {
+      const u = url
+        ? url + "/messages"
+        : import.meta.env.VITE_API_URL + "/messages";
+      const res = await fetch(u, {
         method: "POST",
         body: JSON.stringify({ message: input }),
       });
@@ -46,6 +50,12 @@ function App() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Введите сообщение..."
+        />
+        <input
+          type="text"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="Введите url..."
         />
         <button onClick={handleSave} disabled={isButtonDisabled}>
           Сохранить
