@@ -1,13 +1,95 @@
 .container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
 
-.title {
-  font-size: 48px;
-  font-weight: 500;
-  color: #08060d;
-  margin: 0;
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .form {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+
+    input {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+
+      &:focus {
+        border-color: #0070f3;
+      }
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover:not(:disabled) {
+        background-color: #0051cc;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .messageList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    .messageItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      margin-bottom: 12px;
+      background-color: #f5f5f5;
+      border-radius: 6px;
+
+      .messageText {
+        flex: 1;
+        font-size: 16px;
+      }
+
+      .deleteButton {
+        padding: 8px 16px;
+        font-size: 14px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 12px;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #c82333;
+        }
+      }
+    }
+
+    .emptyMessage {
+      text-align: center;
+      color: #999;
+      font-size: 16px;
+      padding: 24px;
+    }
+  }
 }

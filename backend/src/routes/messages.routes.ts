@@ -45,7 +45,7 @@ export const createMessagesRoutes = (controller: MessagesController): Router => 
    *         name: id
    *         required: true
    *         schema:
-   *           type: string
+   *           type: integer
    *     responses:
    *       200:
    *         description: Message found
@@ -90,7 +90,7 @@ export const createMessagesRoutes = (controller: MessagesController): Router => 
    *         name: id
    *         required: true
    *         schema:
-   *           type: string
+   *           type: integer
    *     requestBody:
    *       required: true
    *       content:
@@ -121,7 +121,7 @@ export const createMessagesRoutes = (controller: MessagesController): Router => 
    *         name: id
    *         required: true
    *         schema:
-   *           type: string
+   *           type: integer
    *     responses:
    *       204:
    *         description: Message deleted

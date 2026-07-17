@@ -1,14 +1,14 @@
 export interface Message {
-  id: string;
-  text: string;
+  id: number;
+  message: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
 export interface CreateMessageDto {
-  text: string;
+  message: string;
 }
 
 export interface UpdateMessageDto {
-  text?: string;
+  message?: string;
 }

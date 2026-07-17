@@ -34,6 +34,7 @@ services:
       - backend
     networks:
       - internal
+      - public
 
   frontend:
     profiles:
@@ -47,7 +48,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=${NODE_ENV:-development}
-      - VITE_API_URL=${VITE_API_URL:-http://localhost:5000/api}
+      - VITE_API_URL=http://backend:5000/api
     depends_on:
       - backend
     networks:

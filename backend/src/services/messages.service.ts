@@ -8,7 +8,7 @@ export class MessagesService {
     return this.repository.findAll();
   }
 
-  async getById(id: string): Promise<Message | null> {
+  async getById(id: number): Promise<Message | null> {
     const message = await this.repository.findById(id);
     if (!message) {
       throw new Error('Message not found');
@@ -17,19 +17,19 @@ export class MessagesService {
   }
 
   async create(data: CreateMessageDto): Promise<Message> {
-    if (!data.text || data.text.trim().length === 0) {
+    if (!data.message || data.message.trim().length === 0) {
       throw new Error('Text is required');
     }
     return this.repository.create(data);
   }
 
-  async update(id: string, data: UpdateMessageDto): Promise<Message> {
+  async update(id: number, data: UpdateMessageDto): Promise<Message> {
     const existing = await this.repository.findById(id);
     if (!existing) {
       throw new Error('Message not found');
     }
 
-    if (data.text !== undefined && data.text.trim().length === 0) {
+    if (data.message !== undefined && data.message.trim().length === 0) {
       throw new Error('Text cannot be empty');
     }
 
@@ -40,7 +40,7 @@ export class MessagesService {
     return updated;
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: number): Promise<void> {
     const existing = await this.repository.findById(id);
     if (!existing) {
       throw new Error('Message not found');
