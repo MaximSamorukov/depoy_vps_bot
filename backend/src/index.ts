@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 async function initDatabase() {
-  const migrationPath = path.join(__dirname, '../migrations/001-create-messages-table.sql');
+  const migrationPath = path.join(__dirname, './migrations/001-create-messages-table.sql');
   const sql = fs.readFileSync(migrationPath, 'utf-8');
   await pool.query(sql);
   console.log('Database initialized');

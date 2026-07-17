@@ -25,9 +25,14 @@ function App() {
       const res = await fetch(u, {
         method: "POST",
         body: JSON.stringify({ message: input }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const created = await res.json();
-      setMessages([...messages, created]);
+      if (created.message) {
+        setMessages([...messages, created]);
+      }
       setInput("");
     } catch {}
   };
