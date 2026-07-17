@@ -9,7 +9,7 @@ function App() {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    fetch("/api/messages")
+    fetch(import.meta.env.VITE_API_URL + "/messages")
       .then((r) => r.json())
       .then(setMessages)
       .catch(() => setMessages([]));
@@ -18,7 +18,7 @@ function App() {
   const handleSave = async () => {
     if (!input.trim()) return;
     try {
-      const res = await fetch("/api/messages", {
+      const res = await fetch(import.meta.env.VITE_API_URL + "/messages", {
         method: "POST",
         body: JSON.stringify({ message: input }),
       });
@@ -29,7 +29,9 @@ function App() {
   };
 
   const handleDelete = async (id: number) => {
-    await fetch(`/api/messages/${id}`, { method: "DELETE" });
+    await fetch(import.meta.env.VITE_API_URL + `/messages/${id}`, {
+      method: "DELETE",
+    });
     setMessages(messages.filter((m) => m.id !== id));
   };
 
