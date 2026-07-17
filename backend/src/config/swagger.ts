@@ -38,7 +38,7 @@ export const swaggerOptions: Options = {
         },
         CreateMessageDto: {
           type: 'object',
-          required: ['text'],
+          required: ['message'],
           properties: {
             message: {
               type: 'string',

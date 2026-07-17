@@ -23,7 +23,7 @@ export const createMessagesRoutes = (controller: MessagesController): Router => 
    *                 properties:
    *                   id:
    *                     type: string
-   *                   text:
+   *                   message:
    *                     type: string
    *                   createdAt:
    *                     type: string
@@ -67,9 +67,9 @@ export const createMessagesRoutes = (controller: MessagesController): Router => 
    *           schema:
    *             type: object
    *             required:
-   *               - text
+   *               - message
    *             properties:
-   *               text:
+   *               message:
    *                 type: string
    *     responses:
    *       201:
@@ -98,7 +98,7 @@ export const createMessagesRoutes = (controller: MessagesController): Router => 
    *           schema:
    *             type: object
    *             properties:
-   *               text:
+   *               message:
    *                 type: string
    *     responses:
    *       200:
